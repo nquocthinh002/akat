@@ -1,6 +1,5 @@
 
 
-// mongodb+srv://pethinh1810_db_user:0MroJTgZdETQr9kv@cluster0.gupbpag.mongodb.net/?appName=Cluster0
 // const connectString = `mongodb://${host}:${port}/${name}`
 const dev = {
     app: {
@@ -20,10 +19,10 @@ const pro = {
         port: process.env.PRO_APP_PORT || 3000
     },
     db: {
-        mongodb: process.env.PRO_DB_MONGODB || 'mongodb+srv',
-        host: process.env.PRO_DB_HOST || 'pethinh1810_db_user',
-        port: process.env.PRO_DB_PORT || '0MroJTgZdETQr9kv@cluster0.gupbpag.mongodb.net',
-        name: process.env.PRO_DB_NAME || '?appName=Cluster0',
+        mongodb: process.env.PRO_DB_MONGODB || '',
+        host: process.env.PRO_DB_HOST || '',
+        port: process.env.PRO_DB_PORT || '',
+        name: process.env.PRO_DB_NAME || '',
     }
 }
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const { db: { mongodb, host, port, name } } = require('../configs/config.mongodb')
-// mongodb+srv://pethinh1810_db_user:0MroJTgZdETQr9kv@cluster0.gupbpag.mongodb.net/?appName=Cluster0
+
 const connectString = `${mongodb}://${host}:${port}/${name}`
 
 class Database {
