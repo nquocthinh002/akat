@@ -30,7 +30,7 @@ app.use(morgan('dev'))
 require('./api/v1/databases/init.mongodb')
 
 app.get('/', (req, res) => {
-    res.send(`Welcome to AKAT API RUNNING... ${process.env.CLIENT_URL}`)
+    res.send(`Welcome to AKAT API RUNNING... ${process.env.DEV_DB_NAME}`)
 })
 // init routes 
 app.use('/', require('./api/v1/routes'))
