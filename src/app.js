@@ -5,11 +5,11 @@ const helmet = require('helmet')
 const compression = require('compression')
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
-const { createServer } = require('node:http');
+// const { createServer } = require('node:http');
 
 
 const app = express()
-const server = new createServer(app)
+// const server = new createServer(app)
 
 // init middleware
 app.use(compression())
@@ -38,4 +38,4 @@ app.use('/', require('./api/v1/routes'))
 
 // handling error
 
-module.exports = server
+module.exports = app //server
