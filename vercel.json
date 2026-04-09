@@ -1,19 +1,20 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "./server.jsserver.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/src/api/v1/(.*)",
-        "dest": "../app.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/app.js"
+    }
+  ],
+  "functions": {
+    "src/app.js": {
+      "maxDuration": 10
+    }
   }
+}
