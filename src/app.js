@@ -29,6 +29,9 @@ app.use(morgan('dev'))
 // init database
 require('./api/v1/databases/init.mongodb')
 
+app.get('/', (req, res) => {
+    res.send('API RUNNING')
+})
 // init routes 
 app.use('/', require('./api/v1/routes'))
 
