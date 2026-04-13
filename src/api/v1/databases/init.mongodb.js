@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { db: { mongodb, host, port, name } } = require('../configs/config.mongodb')
+const { db: { mongodb, host, port, name } } = require('../configs/mongodb.config')
 
 const connectString = `${mongodb}://${host}:${port}/${name}`
 

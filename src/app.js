@@ -6,9 +6,10 @@ const compression = require('compression')
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 // const { createServer } = require('node:http');
-
+const setupSwagger = require('./api/v1/configs/swagger.config')
 
 const app = express()
+setupSwagger(app)
 // const server = new createServer(app)
 
 // init middleware
@@ -34,6 +35,8 @@ app.get('/', (req, res) => {
 })
 // init routes 
 app.use('/', require('./api/v1/routes'))
+
+
 
 
 // handling error

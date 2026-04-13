@@ -1,6 +1,6 @@
 const Signal = require('../models/signal.model')
 
-// 🧩 Tạo Signal mới
+// 🧩 Tạo Signal mới  
 exports.createSignal = async (req, res) => {
   try {
     const signal = new Signal(req.body)

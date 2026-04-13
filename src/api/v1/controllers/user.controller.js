@@ -76,6 +76,7 @@ class UserController {
         }
     }
 
+
     getPersonnels = async (req, res) => {
         try {
             console.log('[GET]::getPersonnels::');

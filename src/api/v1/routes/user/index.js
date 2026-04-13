@@ -6,6 +6,7 @@ const Middlewares = require('../../middlewares/verifyToken.middleware');
 
 
 router.get('/', [Middlewares.verifyAccessToken, Middlewares.isAssistant], UserController.getUsers)
+
 router.get('/personnels', UserController.getPersonnels)
 router.get('/me', [Middlewares.verifyAccessToken], UserController.getMe)
 router.get('/:userId', [Middlewares.verifyAccessToken, Middlewares.isAssistant], UserController.getUser)
