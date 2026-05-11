@@ -17,9 +17,9 @@ class AccessController {
             const { fullName, email, password, phone } = req.body
 
             // Check for missing inputs (400 Bad Request)
-            if (!fullName || !email || !password ||!phone) {
-                return res.status(200).json({
-                    code: 'xxx1',
+            if (!fullName || !email || !password || !phone) {
+                return res.status(400).json({
+                    code: '400',
                     status: false,
                     message: 'Missing input!'
                 })
@@ -29,19 +29,19 @@ class AccessController {
             const userEmail = await userModel.findOne({ email }).lean()
             const userPhone = await userModel.findOne({ phone }).lean()
             if (userEmail || userPhone) {
-                return res.status(200).json({
-                    code: 'xxx2',
+                return res.status(409).json({
+                    code: '409',
                     status: false,
                     message: 'Email or Phone already registered!'
                 })
             }
 
             const verificationToken = crypto.randomBytes(32).toString('hex')
-            const newUser = await userModel.create({ fullName, email, password, phone, verificationToken })
+            const newUser = await userModel.create({ fullName, email, password, phone, verificationToken, isActive: true })
 
             // Internal Server Error (500)
             if (!newUser) {
-                return res.status(200).json({
+                return res.status(500).json({
                     code: 500,
                     status: false,
                     message: 'Something went wrong!'
@@ -66,15 +66,22 @@ class AccessController {
                 </div>
             `;
 
-            const info = await sendMail({ email, subject, html });
+            // const info = await sendMail({ email, subject, html });
+
+            const accessToken = generateAccessToken(newUser._id, newUser.role);
+            const refreshToken = generateRefreshToken(newUser._id);
+            newUser.refreshToken = refreshToken;
+            await newUser.save();
+            res.cookie('refreshToken', refreshToken, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
 
 
             // 201: CREATED
             return res.status(201).json({
                 code: 201,
                 status: true,
-                user: getInfoData({ fileds: ['_id', 'name', 'email'], object: newUser }),
-                info
+                accessToken: accessToken,
+                user: getInfoData({ fileds: ['_id', 'name', 'email', 'phone'], object: newUser }),
+                // info
             })
         } catch (error) {
             next(error)
@@ -87,7 +94,7 @@ class AccessController {
             const user = await userModel.findOne({ verificationToken, isActive: false })
 
             if (!user) {
-                return res.status(200).json({
+                return res.status(500).json({
                     code: 500,
                     status: false,
                     message: 'Authentication failed! Please try again...'
@@ -111,8 +118,8 @@ class AccessController {
             const { phone, password } = req.body
             // Check for missing inputs (400 Bad Request)
             if (!phone || !password) {
-                return res.status(200).json({
-                    code: 'xxx',
+                return res.status(400).json({
+                    code: '400',
                     status: false,
                     message: 'Missing input!'
                 })
@@ -130,8 +137,8 @@ class AccessController {
             // User not found (401 Unauthorized)
             const isCorrectPassword = await user?.isCorrectPassword(password)
             if (!user || !isCorrectPassword) {
-                return res.status(200).json({
-                    code: 'xxx',
+                return res.status(401).json({
+                    code: '401',
                     status: false,
                     message: 'Wrong phone or password!'
                 })

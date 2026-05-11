@@ -37,6 +37,7 @@ const userSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    avatar: String,
     
     // dành riêng cho broker , tách thành bảng riêng
     // brokerInfo: {
