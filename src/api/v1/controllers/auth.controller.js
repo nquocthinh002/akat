@@ -80,6 +80,7 @@ class AccessController {
                 code: 201,
                 status: true,
                 accessToken: accessToken,
+                refreshToken: refreshToken,
                 user: getInfoData({ fileds: ['_id', 'name', 'email', 'phone'], object: newUser }),
                 // info
             })
@@ -162,6 +163,7 @@ class AccessController {
                 code: 200,
                 status: true,
                 token: accessToken,
+                refreshToken: refreshToken,
                 user: getInfoData({ fileds: ["_id", "fullName", "email", "phone"], object: user.toObject() }),
             })
         } catch (error) {

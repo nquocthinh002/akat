@@ -20,7 +20,7 @@ class UserController {
 
             return res.status(200).json({
                 status: !!user,
-                user: user ? getInfoDataOmit({ fileds: ["password", "role", "status", "verificationToken", "refreshToken", "passwordChangedAt", "passwordResetToken", "passwordResetExpires"], object: user }) : null
+                user: user ? getInfoDataOmit({ fileds: ["password", "role", "status", "verificationToken", "passwordChangedAt", "passwordResetToken", "passwordResetExpires"], object: user }) : null
             })
         } catch (error) {
 
