@@ -16,7 +16,7 @@ setupSwagger(app)
 app.use(compression())
 app.use(helmet())
 app.use(cors({
-    origin: process.env.CLIENT_URL || '*',
+    origin: process.env.CLIENT_URL ,
     methods: 'GET,POST,PUT,PATCH,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
     credentials: true

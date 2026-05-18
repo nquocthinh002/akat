@@ -27,7 +27,7 @@ const signalSchema = new mongoose.Schema(
         description: String,
         planAccess: [{ type: Schema.Types.ObjectId, ref: 'Plan' }],
         // AI / broker tạo
-        createdBy: {
+        userId: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             default: null
